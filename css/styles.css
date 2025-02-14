@@ -1,0 +1,421 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  nav {
+    background-color: green;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+  }
+  
+  ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  ul li {
+    margin-right: 20px;
+  }
+  
+  ul li a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .active{
+    color: black;
+    font-weight: bold;
+  }
+  
+  ul li a:hover {
+    color: lightgreen;
+  }
+  
+  .checkbtn {
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+    display: none;
+  }
+  
+  #check {
+    display: none;
+  }
+
+ .section-bienvenue{
+      justify-content: space-between;
+       align-items: center;
+       padding: 50px 20px;
+       height: 36vh;
+       background-color: #f5f5f5;
+       color: #333;
+       font-size: 2rem;
+       font-weight: bold;
+       display: flex;
+ }
+ .bienvenue-content {
+  max-width: 50%;
+}
+
+.bienvenue-content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.bienvenue-content p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.bienvenue-content .btn-decouvrir {
+  background-color: green;
+  color: white;
+  padding: 10px 20px 20px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.bienvenue-content .btn-decouvrir:hover {
+  background-color: darkgreen;
+}
+
+.bienvenue-image img {
+  max-width: 100%;
+  border-radius: 10px;
+}
+/* Section Recherche */
+.section-recherche {
+  text-align: center;
+  padding: 50px 20px;
+  background-color: green;
+  color: white;
+}
+
+.section-recherche h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.section-recherche p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.section-recherche form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.section-recherche input[type="text"] {
+  width: 300px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px 0 0 5px;
+}
+
+.section-recherche button {
+  padding: 10px 20px;
+  background-color: darkgreen;
+  color: white;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.section-recherche button:hover {
+  background-color: #006400;
+}
+/* Section Livres Populaires */
+.section-populaire {
+  padding: 50px 20px;
+  background-color: #f5f5f5;
+  text-align: center;
+}
+
+.section-populaire h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.livres-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.livre-card {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 30%;
+  margin: 10px;
+  text-align: center;
+}
+
+.livre-card img {
+  max-width: 100%;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.livre-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.livre-card p {
+  font-size: 1rem;
+  margin-bottom: 15px;
+}
+
+.livre-card .btn-details {
+  background-color: green;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.livre-card .btn-details:hover {
+  background-color: darkgreen;
+}
+
+/* Section Services */
+.section-services {
+  padding: 50px 20px;
+  background-color: white;
+  text-align: center;
+}
+
+.section-services h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.services-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.service-card {
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 30%;
+  margin: 10px;
+  text-align: center;
+  transform: translateY(-10px);
+}
+.service-card{
+  transition: transform 2s;
+}
+
+.service-card i {
+  font-size: 2rem;
+  color: green;
+  margin-bottom: 15px;
+}
+
+.service-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.service-card p {
+  font-size: 1rem;
+}
+
+/* Footer Styles */
+.footer {
+  background-color: #333;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 250px;
+  margin: 10px;
+}
+
+.footer-section h3 {
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+}
+
+.footer-section p, .footer-section ul {
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-section ul li a:hover {
+  color: lightgreen;
+}
+
+.footer-section.contact p {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.footer-section.contact i {
+  margin-right: 10px;
+}
+
+.footer-section.social .social-icons {
+  display: flex;
+  justify-content: center;
+}
+
+.footer-section.social .social-icons a {
+  color: white;
+  margin: 0 10px;
+  font-size: 1.2rem;
+  transition: color 0.3s;
+}
+
+.footer-section.social .social-icons a:hover {
+  color: lightgreen;
+}
+
+.footer-bottom {
+  background-color: #222;
+  padding: 10px 0;
+  font-size: 0.8rem;
+  margin-top: 20px;
+}
+@keyframes moveUpDown {
+  0%, 100% {
+    transform: translateY(0); /* Position initiale et finale */
+  }
+  50% {
+    transform: translateY(-10px); /* Déplacement vers le haut */
+  }
+}
+
+/* Appliquer l'animation à l'image */
+.bienvenue-image img {
+  animation: moveUpDown 3s ease-in-out infinite; /* 3s de durée, répétition infinie */
+}
+  /* responsivité */
+  
+  @media (max-width: 768px) {
+    .checkbtn {
+      display: block;
+      order: 1;
+      margin-right: 20px;
+    }
+  
+    ul {
+      position: fixed;
+      top: 80px;
+      right: -100%;
+      background-color: green;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.3s;
+    }
+  
+    ul li {
+      margin: 20px 0;
+    }
+  
+    ul li a {
+      font-size: 20px;
+    }
+  
+    #check:checked ~ ul {
+      right: 0;
+    }
+    .footer-content {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .footer-section {
+      text-align: center;
+      margin: 20px 0;
+  }
+
+  .footer-section.social .social-icons {
+      justify-content: center;
+  }
+  .section-bienvenue {
+    flex-direction: column;
+    text-align: center;
+}
+
+.bienvenue-content {
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+
+.livre-card, .service-card {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.section-recherche form {
+    flex-direction: column;
+}
+
+.section-recherche input[type="text"] {
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.section-recherche button {
+    width: 100%;
+    border-radius: 5px;
+}
+  }
+

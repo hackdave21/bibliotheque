@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Résultats de recherche</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Résultats de recherche</h1>
+    </header>
+
+    <section class="results">
+        <h2>Résultats de recherche</h2>
+        <?php if (empty($searchResults)): ?>
+            <p>Aucun résultat trouvé.</p>
+        <?php else: ?>
+            <div class="books-grid">
+                <?php foreach ($searchResults as $book): ?>
+                    <div class="book-card">
+                        <h3><?php echo htmlspecialchars($book['titre']); ?></h3>
+                        <p>Par <?php echo htmlspecialchars($book['auteur']); ?></p>
+                        <a href="details.php?id=<?php echo $book['id']; ?>" class="btn">Voir les détails</a>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+    </section>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
