@@ -1,3 +1,8 @@
+<?php
+// Inclure le fichier db.php pour accéder à la fonction getLivres()
+require_once 'php/db.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -18,11 +23,12 @@
             <i class="fas fa-bars"></i>
         </label>
         <label class="logo">Bibliothèque en ligne</label>
-        <ul>
+        <ul class="navbar">
             <li><a class="active" href="index.html">Accueil</a></li>
             <li><a href="#">Nos livres</a></li>
             <li><a href="wishlist.html">Favoris</a></li>
             <li><a href="contact.html">Contact</a></li>
+            <button class="register"><a href="register.html">S'inscrire</a></button>
         </ul>
     </nav>
 
@@ -40,7 +46,7 @@
     <section class="section-recherche">
         <h2>Faites votre recherche</h2>
         <p>Vous avez un livre que vous aimeriez lire ? Tapez juste son titre ou le nom de l'auteur.</p>
-        <form action="php/search.php" method="GET">
+        <form action="results.html" method="GET">
             <input type="text" name="query" placeholder="Rechercher par titre ou auteur" required>
             <button type="submit"><i class="fas fa-search"></i> Rechercher</button>
         </form>
@@ -49,23 +55,17 @@
     <section class="section-populaire">
         <h2>Livres déjà diponibles</h2>
         <div class="livres-container">
-            <div class="livre-card">
-                <img src="images/livre1.jpg" alt="Livre 1">
-                <h3>Le Petit Prince</h3>
-                <p>Antoine de Saint-Exupéry</p>
-                <a href="#" class="btn-details">Voir détails</a>
-            </div>
-            <div class="livre-card">
-                <img src="images/livre2.jpg" alt="Livre 2">
-                <h3>1984</h3>
-                <p>George Orwell</p>
-                <a href="#" class="btn-details">Voir détails</a>
-            </div>
-            <div class="livre-card">
-                <img src="images/livre3.jpg" alt="Livre 3">
-                <h3>Harry Potter</h3>
-                <p>J.K. Rowling</p>
-                <a href="#" class="btn-details">Voir détails</a>
+            <div class="livres-container">
+                <?php 
+                $livres = getLivres();
+                foreach($livres as $livre) : 
+                ?>
+                    <div class="livre-card">
+                        <h3><?php echo htmlspecialchars($livre['titre']); ?></h3>
+                        <p><?php echo htmlspecialchars($livre['auteur']); ?></p>
+                        <a href="details.php?id=<?php echo $livre['id']; ?>" class="btn-details">Voir détails</a>
+                    </div>
+                <?php endforeach; ?>
             </div>
         </div>
     </section>

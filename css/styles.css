@@ -328,6 +328,28 @@ body {
   font-size: 0.8rem;
   margin-top: 20px;
 }
+.register{
+  background-color: black;
+  color: white;
+  height: 30px;
+  border-radius: 8px;
+  
+}
+a{
+  text-decoration: none;
+  color: white;
+}
+a:hover{
+  color: black;
+
+}
+.register:hover{
+  background-color: white;
+  transform: translateX(-5px); 
+}
+.navbar{
+  align-items: center;
+}
 @keyframes moveUpDown {
   0%, 100% {
     transform: translateY(0); /* Position initiale et finale */
@@ -339,7 +361,61 @@ body {
 
 /* Appliquer l'animation à l'image */
 .bienvenue-image img {
-  animation: moveUpDown 3s ease-in-out infinite; /* 3s de durée, répétition infinie */
+  animation: moveUpDown 3s ease-in-out infinite;
+}
+
+/*  pour les résultats de recherche */
+.results {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  justify-content: center;
+}
+
+.livre-card {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  text-align: center;
+}
+
+.livre-card img {
+  max-width: 100%;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.livre-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.livre-card p {
+  font-size: 1rem;
+  margin-bottom: 15px;
+}
+
+.livre-card .btn-details {
+  background-color: green;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.livre-card .btn-details:hover {
+  background-color: darkgreen;
+}
+
+.no-results {
+  text-align: center;
+  font-size: 1.2rem;
+  color: red;
+  margin-top: 20px;
 }
   /* responsivité */
   
