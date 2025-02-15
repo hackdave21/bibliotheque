@@ -1,5 +1,8 @@
 <?php
-include 'configuration_database.php';
+include __DIR__ . '/db.php';
+
+// Établir la connexion à la base de données
+$conn = connectDB();
 
 // Ajouter un nouveau livre
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['titre'], $_POST['auteur'], $_POST['description'], $_POST['maison_edition'], $_POST['nombre_exemplaire'])) {
@@ -10,10 +13,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['titre'], $_POST['auteu
     $nombreExemplaire = $_POST['nombre_exemplaire'];
 
     $stmt = $conn->prepare("INSERT INTO livres (titre, auteur, description, maison_edition, nombre_exemplaire) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssi", $titre, $auteur, $description, $maisonEdition, $nombreExemplaire);
+    $stmt->bindParam(1, $titre);
+    $stmt->bindParam(2, $auteur);
+    $stmt->bindParam(3, $description);
+    $stmt->bindParam(4, $maisonEdition);
+    $stmt->bindParam(5, $nombreExemplaire);
     $stmt->execute();
 
-    echo "Le livre a été ajouté avec succès.";
+    // Rediriger vers la page d'accueil après l'ajout
+    header("Location: ../index.php");
+    exit();
 }
 
 // Mettre à jour un livre
@@ -26,7 +35,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'], $_POST['titre'],
     $nombreExemplaire = $_POST['nombre_exemplaire'];
 
     $stmt = $conn->prepare("UPDATE livres SET titre = ?, auteur = ?, description = ?, maison_edition = ?, nombre_exemplaire = ? WHERE id = ?");
-    $stmt->bind_param("ssssii", $titre, $auteur, $description, $maisonEdition, $nombreExemplaire, $id);
+    $stmt->bindParam(1, $titre);
+    $stmt->bindParam(2, $auteur);
+    $stmt->bindParam(3, $description);
+    $stmt->bindParam(4, $maisonEdition);
+    $stmt->bindParam(5, $nombreExemplaire);
+    $stmt->bindParam(6, $id);
     $stmt->execute();
 
     echo "Le livre a été mis à jour avec succès.";
@@ -36,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'], $_POST['titre'],
 if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['id'])) {
     $id = $_GET['id'];
     $stmt = $conn->prepare("DELETE FROM livres WHERE id = ?");
-    $stmt->bind_param("i", $id);
+    $stmt->bindParam(1, $id);
     $stmt->execute();
 
     echo "Le livre a été supprimé avec succès.";

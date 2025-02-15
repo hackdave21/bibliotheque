@@ -24,10 +24,9 @@ require_once 'php/db.php';
         </label>
         <label class="logo">Bibliothèque en ligne</label>
         <ul class="navbar">
-            <li><a class="active" href="index.html">Accueil</a></li>
+            <li><a class="active" href="index.php">Accueil</a></li>
             <li><a href="#">Nos livres</a></li>
-            <li><a href="wishlist.html">Favoris</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="wishlist.html">Liste de lecture</a></li>
             <button class="register"><a href="register.html">S'inscrire</a></button>
         </ul>
     </nav>
@@ -54,7 +53,6 @@ require_once 'php/db.php';
 
     <section class="section-populaire">
         <h2>Livres déjà diponibles</h2>
-        <div class="livres-container">
             <div class="livres-container">
                 <?php 
                 $livres = getLivres();
@@ -66,8 +64,30 @@ require_once 'php/db.php';
                         <a href="details.php?id=<?php echo $livre['id']; ?>" class="btn-details">Voir détails</a>
                     </div>
                 <?php endforeach; ?>
-            </div>
-        </div>
+            </div><br>
+            <button class="ajout" id="btn-ajouter-livre">Ajouter un livre</button>
+
+            <div id="form-ajout-livre" style="display: none;">
+        <h3>Ajouter un nouveau livre</h3>
+        <form action="php/crud.php" method="POST">
+            <label for="titre">Titre :</label>
+            <input type="text" id="titre" name="titre" required><br>
+
+            <label for="auteur">Auteur :</label>
+            <input type="text" id="auteur" name="auteur" required><br>
+
+            <label for="description">Description :</label>
+            <textarea id="description" name="description" required></textarea><br>
+
+            <label for="maison_edition">Maison d'édition :</label>
+            <input type="text" id="maison_edition" name="maison_edition" required><br>
+
+            <label for="nombre_exemplaire">Nombre d'exemplaires :</label>
+            <input type="number" id="nombre_exemplaire" name="nombre_exemplaire" required><br>
+
+            <button type="submit">Ajouter</button>
+        </form>
+    </div>
     </section>
 
     <section class="section-services">
@@ -90,6 +110,17 @@ require_once 'php/db.php';
             </div>
         </div>                     
     </section>
+
+    <script>
+    document.getElementById('btn-ajouter-livre').addEventListener('click', function() {
+        const form = document.getElementById('form-ajout-livre');
+        if (form.style.display === 'none') {
+            form.style.display = 'block';
+        } else {
+            form.style.display = 'none';
+        }
+    });
+</script>
 
 </body>
 
