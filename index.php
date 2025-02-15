@@ -1,6 +1,18 @@
 <?php
 // Inclure le fichier db.php pour accéder à la fonction getLivres()
 require_once 'php/db.php';
+// Vérifier si un livre est sélectionné
+$livreSelectionne = null;
+if (isset($_GET['livre'])) {
+    $titreLivre = urldecode($_GET['livre']);
+    $conn = connectDB();
+
+    // Récupérer les détails du livre
+    $stmt = $conn->prepare("SELECT * FROM livres WHERE titre = ?");
+    $stmt->bindValue(1, $titreLivre, PDO::PARAM_STR);  
+    $stmt->execute();
+    $livreSelectionne = $stmt->fetch(PDO::FETCH_ASSOC);   
+}
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +37,7 @@ require_once 'php/db.php';
         <label class="logo">Bibliothèque en ligne</label>
         <ul class="navbar">
             <li><a class="active" href="index.php">Accueil</a></li>
-            <li><a href="#">Nos livres</a></li>
+            <li><a href="#liste">Nos livres</a></li>
             <li><a href="wishlist.html">Liste de lecture</a></li>
             <button class="register"><a href="register.html">S'inscrire</a></button>
         </ul>
@@ -42,8 +54,7 @@ require_once 'php/db.php';
         </div>
     </section>
 
-    <section class="section-recherche">
-        <h2>Faites votre recherche</h2>
+    <section class="section-recherche"> 
         <p>Vous avez un livre que vous aimeriez lire ? Tapez juste son titre ou le nom de l'auteur.</p>
         <form action="results.html" method="GET">
             <input type="text" name="query" placeholder="Rechercher par titre ou auteur" required>
@@ -51,7 +62,7 @@ require_once 'php/db.php';
         </form>
     </section>
 
-    <section class="section-populaire">
+    <section class="section-populaire" id="liste">
         <h2>Livres déjà diponibles</h2>
             <div class="livres-container">
                 <?php 
@@ -61,7 +72,7 @@ require_once 'php/db.php';
                     <div class="livre-card">
                         <h3><?php echo htmlspecialchars($livre['titre']); ?></h3>
                         <p><?php echo htmlspecialchars($livre['auteur']); ?></p>
-                        <a href="details.php?id=<?php echo $livre['id']; ?>" class="btn-details">Voir détails</a>
+                        <a href="#" class="btn-details" onclick="afficherDetails(<?php echo $livre['id']; ?>); return false;">Voir détails</a>
                     </div>
                 <?php endforeach; ?>
             </div><br>
@@ -70,19 +81,19 @@ require_once 'php/db.php';
             <div id="form-ajout-livre" style="display: none;">
         <h3>Ajouter un nouveau livre</h3>
         <form action="php/crud.php" method="POST">
-            <label for="titre">Titre :</label>
+            <label for="titre">Titre </label>
             <input type="text" id="titre" name="titre" required><br>
 
-            <label for="auteur">Auteur :</label>
+            <label for="auteur">Auteur </label>
             <input type="text" id="auteur" name="auteur" required><br>
 
-            <label for="description">Description :</label>
+            <label for="description">Description </label>
             <textarea id="description" name="description" required></textarea><br>
 
-            <label for="maison_edition">Maison d'édition :</label>
+            <label for="maison_edition">Maison d'édition </label>
             <input type="text" id="maison_edition" name="maison_edition" required><br>
 
-            <label for="nombre_exemplaire">Nombre d'exemplaires :</label>
+            <label for="nombre_exemplaire">Nombre d'exemplaires </label>
             <input type="number" id="nombre_exemplaire" name="nombre_exemplaire" required><br>
 
             <button type="submit">Ajouter</button>
@@ -110,8 +121,22 @@ require_once 'php/db.php';
             </div>
         </div>                     
     </section>
+    <section id="details-livre" class="section-details" style="display: none;">
+    <!-- Les détails du livre seront affichés ici -->
+</section>
 
     <script>
+        // Navigation responsive
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});
+
+    // Afficher le formulaire d'ajout de livre lors du clic sur le bouton
     document.getElementById('btn-ajouter-livre').addEventListener('click', function() {
         const form = document.getElementById('form-ajout-livre');
         if (form.style.display === 'none') {
@@ -120,6 +145,22 @@ require_once 'php/db.php';
             form.style.display = 'none';
         }
     });
+    function afficherDetails(livreId) {
+    document.querySelectorAll('section').forEach(section => {
+        section.style.display = 'none';
+    });
+
+    let detailsSection = document.getElementById('details-livre');
+    
+    fetch('php/details.php?id=' + livreId)
+        .then(response => response.text())
+        .then(data => {
+            detailsSection.innerHTML = data;
+            detailsSection.style.display = 'block';
+        })
+        .catch(error => console.error('Erreur :', error));
+}
+
 </script>
 
 </body>

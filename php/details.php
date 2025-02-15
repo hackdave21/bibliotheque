@@ -1,21 +1,27 @@
 <?php
-include 'configuration_database.php';
+require_once 'db.php';
 
 if (isset($_GET['id'])) {
-    $id = $_GET['id'];
+    $idLivre = intval($_GET['id']);
+    $conn = connectDB();
+    
     $stmt = $conn->prepare("SELECT * FROM livres WHERE id = ?");
-    $stmt->bind_param("i", $id);
+    $stmt->bindValue(1, $idLivre, PDO::PARAM_INT);
     $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($row = $result->fetch_assoc()) {
-        echo "<h2>" . $row['titre'] . "</h2>";
-        echo "<p><strong>Auteur :</strong> " . $row['auteur'] . "</p>";
-        echo "<p><strong>Description :</strong> " . $row['description'] . "</p>";
-        echo "<p><strong>Maison d'édition :</strong> " . $row['maison_edition'] . "</p>";
-        echo "<p><strong>Exemplaires disponibles :</strong> " . $row['nombre_exemplaire'] . "</p>";
+    $livre = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    if ($livre) {
+        echo "<h2>Détails du livre</h2>
+              <div class='livre-details'>
+                  <h3>" . htmlspecialchars($livre['titre']) . "</h3>
+                  <p><strong>Auteur :</strong> " . htmlspecialchars($livre['auteur']) . "</p>
+                  <p><strong>Description :</strong> " . htmlspecialchars($livre['description']) . "</p>
+                  <p><strong>Maison d'édition :</strong> " . htmlspecialchars($livre['maison_edition']) . "</p>
+                  <p><strong>Exemplaires disponibles :</strong> " . htmlspecialchars($livre['nombre_exemplaire']) . "</p>
+                 
+              </div>";
     } else {
-        echo "<p>Livre non trouvé.</p>";
+        echo "<p>Livre introuvable.</p>";
     }
 }
 ?>
