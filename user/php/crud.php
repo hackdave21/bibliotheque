@@ -1,7 +1,5 @@
 <?php
 include __DIR__ . '/db.php';
-
-// Établir la connexion à la base de données
 $conn = connectDB();
 
 // Ajouter un nouveau livre
@@ -20,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['titre'], $_POST['auteu
     $stmt->bindParam(5, $nombreExemplaire);
     $stmt->execute();
 
-    // Rediriger vers la page d'accueil après l'ajout
+    // Rediriger vers la page de voir tout
     header("Location: ../index.php");
     exit();
 }
@@ -43,7 +41,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'], $_POST['titre'],
     $stmt->bindParam(6, $id);
     $stmt->execute();
 
-    echo "Le livre a été mis à jour avec succès.";
+    // Rediriger vers la page de voir tout
+
+    exit();
+}
+
+// Supprimer un livre
+if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $stmt = $conn->prepare("DELETE FROM livres WHERE id = ?");
+    $stmt->bindParam(1, $id);
+    $stmt->execute();
+
+    echo "Le livre a été supprimé avec succès.";
 }
 
 // Supprimer un livre

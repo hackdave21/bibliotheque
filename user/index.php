@@ -1,5 +1,4 @@
 <?php
-// Inclure le fichier db.php pour accéder à la fonction getLivres()
 require_once 'php/db.php';
 // Vérifier si un livre est sélectionné
 $livreSelectionne = null;
@@ -29,12 +28,13 @@ if (isset($_GET['livre'])) {
 </head>
 
 <body>
+     <!-- navbar -->
     <nav>
         <input type="checkbox" id="check">
         <label for="check" class="checkbtn">
             <i class="fas fa-bars"></i>
         </label>
-        <label class="logo">Bibliothèque en ligne</label>
+        <label class="logo">Bibliophile</label>
         <ul class="navbar">
             <li><a class="active" href="index.php">Accueil</a></li>
             <li><a href="#liste">Nos livres</a></li>
@@ -42,26 +42,27 @@ if (isset($_GET['livre'])) {
             <button class="register"><a href="register.html">S'inscrire</a></button>
         </ul>
     </nav>
-
+ <!-- section de bienvenue -->
     <section class="section-bienvenue">
         <div class="bienvenue-content">
             <h1>Bienvenue dans notre bibliothèque en ligne</h1>
             <p>Cette bibliothèque est entièrement à vous. Vous avez la possibilité d'ajouter, de modifier ou même de supprimer les livres de la collection des livres.</p>
-            <a href="#" class="btn-decouvrir">Découvrir plus <i class="fas fa-arrow-right"></i></a>
+            <!-- <a href="#" class="btn-decouvrir">Découvrir plus <i class="fas fa-arrow-right"></i></a> -->
         </div>
         <div class="bienvenue-image">
             <img src="images/fille.png" alt="Bibliothèque" height="300px">
         </div>
     </section>
-
+ <!-- section de recherche -->
     <section class="section-recherche"> 
         <p>Vous avez un livre que vous aimeriez lire ? Tapez juste son titre ou le nom de l'auteur.</p>
-        <form action="results.html" method="GET">
+        <form action="results.php" method="GET">
             <input type="text" name="query" placeholder="Rechercher par titre ou auteur" required>
             <button type="submit"><i class="fas fa-search"></i> Rechercher</button>
         </form>
     </section>
 
+     <!-- section des livres disponible et ajout des livres -->
     <section class="section-populaire" id="liste">
         <h2>Livres déjà diponibles</h2>
             <div class="livres-container">
@@ -101,6 +102,7 @@ if (isset($_GET['livre'])) {
     </div>
     </section>
 
+     <!-- section des services -->
     <section class="section-services">
         <h2>Nos services</h2>
         <div class="services-container">
@@ -121,12 +123,12 @@ if (isset($_GET['livre'])) {
             </div>
         </div>                     
     </section>
-    <section id="details-livre" class="section-details" style="display: none;">
-    <!-- Les détails du livre seront affichés ici -->
+    <section id="details-livre" class="section-details" style="display: none; padding-left: 20px; padding-bottom: 20px; margin-left: 20px;">
+   
 </section>
 
     <script>
-        // Navigation responsive
+        // navigation responsive
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -136,7 +138,7 @@ if (isset($_GET['livre'])) {
     });
 });
 
-    // Afficher le formulaire d'ajout de livre lors du clic sur le bouton
+    // formulaire d'ajout de livre lors du clic sur le bouton
     document.getElementById('btn-ajouter-livre').addEventListener('click', function() {
         const form = document.getElementById('form-ajout-livre');
         if (form.style.display === 'none') {
@@ -164,7 +166,9 @@ if (isset($_GET['livre'])) {
 </script>
 
 </body>
+ <!-- body -->
 
+ <!-- footer -->
 <footer class="footer">
     <div class="footer-content">
         <div class="footer-section about">
@@ -199,6 +203,6 @@ if (isset($_GET['livre'])) {
         &copy; 2025 Bibliothèque en ligne | Powered by flutter_dave
     </div>
 </footer>
-
+ <!-- footer -->
 </html>
 
